@@ -19,10 +19,10 @@ public class LocationTest {
     public void testConstructor() {
         assertNotNull(location);
 
-        // Check property after creation
-		assertNotNull(location.coordinate);
-        assertEquals(0, location.coordinate.getX(), 0.001);
-        assertEquals(0, location.coordinate.getY(), 0.001);
-        assertEquals(0, location.coordinate.getZ(), 0.001);
+        // Check properties after creation
+		assertNotNull(location.getCoordinate());
+        assertEquals(0, location.getCoordinate().getX(), 0.001);
+        assertEquals(0, location.getCoordinate().getY(), 0.001);
+        assertEquals(0, location.getCoordinate().getZ(), 0.001);
     }
 }
