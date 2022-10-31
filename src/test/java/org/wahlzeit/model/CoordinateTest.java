@@ -4,7 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class CoordinateTest {
     
@@ -31,4 +34,33 @@ public class CoordinateTest {
         assertEquals(2.0, coordinateWithValues.getY(), 0.001);
         assertEquals(3.0, coordinateWithValues.getZ(), 0.001);
 	}
+
+    @Test
+    public void testGetDistance() {
+        Coordinate c1 = new Coordinate(5, 5, 5);
+        Coordinate c2 = new Coordinate(-5, -5, -5);
+        Coordinate c3 = new Coordinate(1, 2, 3);
+        Coordinate c4 = new Coordinate(-10, 0, 10);
+
+        assertEquals(Math.sqrt(75), coordinate.getDistance(c1), 0.001);
+        assertEquals(Math.sqrt(75), coordinate.getDistance(c2), 0.001);
+        assertEquals(0, coordinateWithValues.getDistance(c3), 0.001);
+        assertEquals(Math.sqrt(200), coordinate.getDistance(c4), 0.001);
+    }
+
+    @Test
+    public void testIsEqual() {
+        Coordinate c1 = new Coordinate(1, 2, 3);
+
+        assertTrue(coordinateWithValues.isEqual(c1));
+        assertFalse(coordinate.isEqual(c1));
+    }
+
+    @Test
+    public void testEquals() {
+        Coordinate c1 = new Coordinate(1, 2, 3);
+
+        assertEquals(coordinateWithValues, c1);
+        assertNotEquals(coordinate, c1);
+    }
 }

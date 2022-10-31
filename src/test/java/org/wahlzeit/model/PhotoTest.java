@@ -20,7 +20,7 @@ public class PhotoTest {
         assertNotNull(photo);
         assertNull(photo.location);
         
-        photo.location = new Location();
+        photo.location = new Location(0, 0, 0);
         assertNotNull(photo.location);
     }
 }
