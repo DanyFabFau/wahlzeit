@@ -30,7 +30,11 @@ CREATE TABLE photos (
 	praise_sum integer,
 	no_votes integer,
 	creation_time bigint,
-	location integer REFERENCES locations(id)
+	location integer REFERENCES locations(id),
+	cat_name text,
+	cat_breed text,
+	fur_color text,
+	fur_pattern
 );
 
 CREATE TABLE tags (

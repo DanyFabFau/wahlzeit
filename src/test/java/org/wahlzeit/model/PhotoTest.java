@@ -8,11 +8,11 @@ import static org.junit.Assert.assertNull;
 
 public class PhotoTest {
 
-    private Photo photo;
+    private CatPhoto photo;
     
     @Before
     public void initPhoto() {
-        photo = new Photo();
+        photo = new CatPhoto();
     }
 
     @Test

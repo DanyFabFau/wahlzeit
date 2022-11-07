@@ -1,5 +1,7 @@
 package org.wahlzeit.model;
 
+import java.util.Objects;
+
 public class Coordinate {
 
     private double x;
@@ -18,10 +20,10 @@ public class Coordinate {
     /**
      * @methodtype constructor
      */
-    public Coordinate(double newX, double newY, double newZ) {
-        x = newX;
-        y = newY;
-        z = newZ;
+    public Coordinate(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     /**
@@ -64,9 +66,9 @@ public class Coordinate {
      * @return true if all 3 values (x, y, z) are identical to the given coordinate
      */
     public boolean isEqual(Coordinate coordinate) {
-        return this.getX() == coordinate.getX() &&
-               this.getY() == coordinate.getY() &&
-               this.getZ() == coordinate.getZ();
+        return Double.compare(this.getX(), coordinate.getX()) == 0 &&
+               Double.compare(this.getY(), coordinate.getY()) == 0 &&
+               Double.compare(this.getZ(), coordinate.getZ()) == 0;
     }
 
     @Override
@@ -74,5 +76,10 @@ public class Coordinate {
         // order can be important -> if it's not an instance of Coordinate, false is returned instantly
         return object instanceof Coordinate &&
                this.isEqual((Coordinate) object);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
     }
 }

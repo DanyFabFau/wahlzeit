@@ -60,7 +60,15 @@ public class CoordinateTest {
     public void testEquals() {
         Coordinate c1 = new Coordinate(1, 2, 3);
 
-        assertEquals(coordinateWithValues, c1); 
+        assertEquals(coordinateWithValues, c1);
         assertNotEquals(coordinate, c1);
+    }
+
+    @Test
+    public void testHashCode() {
+        Coordinate c1 = new Coordinate(1, 2, 3);
+
+        assertEquals(coordinateWithValues.hashCode(), c1.hashCode());
+        assertNotEquals(coordinate.hashCode(), c1.hashCode());
     }
 }

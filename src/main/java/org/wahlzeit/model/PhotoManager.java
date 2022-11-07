@@ -15,13 +15,8 @@ import org.wahlzeit.services.*;
 /**
  * A photo manager provides access to and manages photos.
  */
-public class PhotoManager extends ObjectManager {
+public abstract class PhotoManager extends ObjectManager {
 	
-	/**
-	 * 
-	 */
-	protected static final PhotoManager instance = new PhotoManager();
-
 	/**
 	 * In-memory cache for photos
 	 */
@@ -35,43 +30,8 @@ public class PhotoManager extends ObjectManager {
 	/**
 	 * 
 	 */
-	public static final PhotoManager getInstance() {
-		return instance;
-	}
-	
-	/**
-	 * 
-	 */
-	public static final boolean hasPhoto(String id) {
-		return hasPhoto(PhotoId.getIdFromString(id));
-	}
-	
-	/**
-	 * 
-	 */
-	public static final boolean hasPhoto(PhotoId id) {
-		return getPhoto(id) != null;
-	}
-	
-	/**
-	 * 
-	 */
-	public static final Photo getPhoto(String id) {
-		return getPhoto(PhotoId.getIdFromString(id));
-	}
-	
-	/**
-	 * 
-	 */
-	public static final Photo getPhoto(PhotoId id) {
-		return instance.getPhotoFromId(id);
-	}
-	
-	/**
-	 * 
-	 */
-	public PhotoManager() {
-		photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
+	protected PhotoManager() {
+		// do nothing
 	}
 	
 	/**
@@ -118,9 +78,7 @@ public class PhotoManager extends ObjectManager {
 	/**
 	 * 
 	 */
-	protected Photo createObject(ResultSet rset) throws SQLException {
-		return PhotoFactory.getInstance().createPhoto(rset);
-	}
+	protected abstract Photo createObject(ResultSet rset) throws SQLException;
 	
 	/**
 	 * @methodtype command
@@ -342,7 +300,7 @@ public class PhotoManager extends ObjectManager {
 	 * @methodtype assertion
 	 */
 	protected void assertIsNewPhoto(PhotoId id) {
-		if (hasPhoto(id)) {
+		if (getPhotoFromId(id) != null) {
 			throw new IllegalStateException("Photo already exists!");
 		}
 	}

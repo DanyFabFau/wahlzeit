@@ -16,6 +16,8 @@ public class LocationManager extends ObjectManager {
 
     protected static final LocationManager instance = new LocationManager();
 
+    private static final int START_ID = 1;
+
     public static LocationManager getInstance() {
         return instance;
     }
@@ -23,7 +25,11 @@ public class LocationManager extends ObjectManager {
     protected Map<Integer, Location> locationCache = new HashMap<>();
 
     protected LocationManager() {
-        // do nothing
+        Collection<Location> loadedLocations = new ArrayList<>();
+        loadLocations(loadedLocations);
+        for (Location location : loadedLocations) {
+            locationCache.put(location.getId(), location);
+        }
     }
 
     @Override
@@ -32,7 +38,6 @@ public class LocationManager extends ObjectManager {
     }
 
     public Location getLocation(Integer id) {
-        // TODO wofür genau wird hier in PhotoManager primitive methods verwendet? 
         Location location = locationCache.get(id);
         if (location == null) {
             try {
@@ -67,10 +72,15 @@ public class LocationManager extends ObjectManager {
         SysLog.logSysInfo("loaded all locations");
     }
 
-    //public Photo createLocation(double x, double y, double z) throws Exception {
-	//	LocationId id = 
-	//	Location location = new Location();
-	//	addLocation(location);
-	//	return location;
-	//}
+    public Location createLocation(double x, double y, double z) throws Exception {
+		int maxId = START_ID;
+        for (Map.Entry<Integer, Location> entry : locationCache.entrySet()) {
+            if (entry.getKey() > maxId) {
+                maxId = entry.getKey();
+            }
+        }
+		Location location = new Location(maxId + 1, x, y, z);
+		addLocation(location);
+		return location;
+	}
 }
