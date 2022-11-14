@@ -19,7 +19,7 @@ public class Location extends DataObject {
      * @methodtype constructor
      */
     public Location(double x, double y, double z) {
-        coordinate = new Coordinate(x, y, z);
+        coordinate = new CartesianCoordinate(x, y, z);
         incWriteCount();
     }
 
@@ -28,7 +28,7 @@ public class Location extends DataObject {
      */
     public Location(Integer id, double x, double y, double z) {
         this.id = id;
-        coordinate = new Coordinate(x, y, z);
+        coordinate = new CartesianCoordinate(x, y, z);
         incWriteCount();
     }
 
@@ -74,7 +74,7 @@ public class Location extends DataObject {
     @Override
     public void readFrom(ResultSet rset) throws SQLException {
         id = rset.getInt("id");
-        coordinate = new Coordinate(
+        coordinate = new CartesianCoordinate(
             rset.getDouble("coordinate_x"),
             rset.getDouble("coordinate_y"),
             rset.getDouble("coordinate_z")
@@ -84,9 +84,9 @@ public class Location extends DataObject {
     @Override
     public void writeOn(ResultSet rset) throws SQLException {
         rset.updateInt("id", id);
-        rset.updateDouble("coordinate_x", coordinate.getX());
-        rset.updateDouble("coordinate_y", coordinate.getY());
-        rset.updateDouble("coordinate_z", coordinate.getZ());
+        rset.updateDouble("coordinate_x", coordinate.asCartesianCoordinate().getX());
+        rset.updateDouble("coordinate_y", coordinate.asCartesianCoordinate().getY());
+        rset.updateDouble("coordinate_z", coordinate.asCartesianCoordinate().getZ());
     }
 
     @Override

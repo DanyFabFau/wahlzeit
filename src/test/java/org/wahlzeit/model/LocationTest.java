@@ -21,8 +21,8 @@ public class LocationTest {
 
         // Check properties after creation
 		assertNotNull(location.getCoordinate());
-        assertEquals(0, location.getCoordinate().getX(), 0.001);
-        assertEquals(0, location.getCoordinate().getY(), 0.001);
-        assertEquals(0, location.getCoordinate().getZ(), 0.001);
+        assertEquals(0, location.getCoordinate().asCartesianCoordinate().getX(), 0.001);
+        assertEquals(0, location.getCoordinate().asCartesianCoordinate().getY(), 0.001);
+        assertEquals(0, location.getCoordinate().asCartesianCoordinate().getZ(), 0.001);
     }
 }
