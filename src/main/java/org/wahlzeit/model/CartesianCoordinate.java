@@ -52,7 +52,8 @@ public class CartesianCoordinate implements Coordinate {
 
     @Override
     public boolean isEqual(Coordinate coordinate) {
-        return isEqualCartesian(coordinate.asCartesianCoordinate());
+        return isEqualCartesian(coordinate.asCartesianCoordinate()) ||
+               coordinate.asSphericCoordinate().isEqualSpheric(this.asSphericCoordinate());
     }
 
     @Override
@@ -85,7 +86,7 @@ public class CartesianCoordinate implements Coordinate {
      * @param coordinate
      * @return true if all 3 values (x, y, z) are identical to the given coordinate
      */
-    private boolean isEqualCartesian(CartesianCoordinate coordinate) {
+    protected boolean isEqualCartesian(CartesianCoordinate coordinate) {
         return Double.compare(this.getX(), coordinate.getX()) == 0 &&
                Double.compare(this.getY(), coordinate.getY()) == 0 &&
                Double.compare(this.getZ(), coordinate.getZ()) == 0;

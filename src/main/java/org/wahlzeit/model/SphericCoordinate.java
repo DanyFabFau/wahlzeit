@@ -58,7 +58,8 @@ public class SphericCoordinate implements Coordinate {
 
     @Override
     public boolean isEqual(Coordinate coordinate) {
-        return isEqualSpheric(coordinate.asSphericCoordinate());
+        return isEqualSpheric(coordinate.asSphericCoordinate()) ||
+               coordinate.asCartesianCoordinate().isEqualCartesian(this.asCartesianCoordinate());
     }
 
     @Override
@@ -72,7 +73,7 @@ public class SphericCoordinate implements Coordinate {
         return Objects.hash(phi, theta, radius);
     }
 
-    private boolean isEqualSpheric(SphericCoordinate coordinate) {
+    protected boolean isEqualSpheric(SphericCoordinate coordinate) {
         return Double.compare(this.getPhi(), coordinate.getPhi()) == 0 &&
                Double.compare(this.getTheta(), coordinate.getTheta()) == 0 &&
                Double.compare(this.getRadius(), coordinate.getRadius()) == 0;

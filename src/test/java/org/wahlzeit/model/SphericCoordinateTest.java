@@ -59,9 +59,12 @@ public class SphericCoordinateTest {
     @Test
     public void testIsEqual() {
         SphericCoordinate s = new SphericCoordinate();
-
         assertTrue(coordinate.isEqual(s));
         assertFalse(coordinateWithValues.isEqual(s));
+
+        SphericCoordinate sc = new SphericCoordinate(Math.PI / 2, Math.PI, 1);
+        CartesianCoordinate cc = new CartesianCoordinate(-1, 0, 0);
+        assertTrue(sc.isEqual(cc));
     }
 
     @Test
