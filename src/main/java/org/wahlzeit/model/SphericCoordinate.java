@@ -1,8 +1,6 @@
 package org.wahlzeit.model;
 
-import java.util.Objects;
-
-public class SphericCoordinate implements Coordinate {
+public class SphericCoordinate extends AbstractCoordinate {
     
     private double phi;     // latitude
     private double theta;   // longitude
@@ -36,58 +34,6 @@ public class SphericCoordinate implements Coordinate {
     public SphericCoordinate asSphericCoordinate() {
         return this;
     }
-
-    @Override
-    public double getCartesianDistance(Coordinate coordinate) {
-        return asCartesianCoordinate().getCartesianDistance(coordinate);
-    }
-
-    @Override
-    public double getCentralAngle(Coordinate coordinate) {
-        double phi_1 = asDegree(this.getPhi());
-        double phi_2 = asDegree(coordinate.asSphericCoordinate().getPhi());
-        double lambdaDiff = absDiffDeg(asDegree(this.getTheta()), asDegree(coordinate.asSphericCoordinate().getTheta()));
-
-        double sum_1 = Math.sin(phi_1) * Math.sin(phi_2);
-        double sum_2 = Math.cos(phi_1) * Math.cos(phi_2) * Math.cos(lambdaDiff);
-
-        double result = Math.acos(sum_1 + sum_2);
-
-        return asDegree(result);
-    }
-
-    @Override
-    public boolean isEqual(Coordinate coordinate) {
-        return isEqualSpheric(coordinate.asSphericCoordinate()) ||
-               coordinate.asCartesianCoordinate().isEqualCartesian(this.asCartesianCoordinate());
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return object instanceof SphericCoordinate &&
-               isEqual((SphericCoordinate) object);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(phi, theta, radius);
-    }
-
-    protected boolean isEqualSpheric(SphericCoordinate coordinate) {
-        return Double.compare(this.getPhi(), coordinate.getPhi()) == 0 &&
-               Double.compare(this.getTheta(), coordinate.getTheta()) == 0 &&
-               Double.compare(this.getRadius(), coordinate.getRadius()) == 0;
-    }
-
-    protected double asDegree(double rad) {
-        return Math.toDegrees(rad);
-    }
-
-    protected double absDiffDeg(double angle_1, double angle_2) {
-        double normDeg = Math.abs(angle_1 - angle_2) % 360;
-        return Math.min(360 - normDeg, normDeg);
-    }
-
 
     //#region GETTER
 

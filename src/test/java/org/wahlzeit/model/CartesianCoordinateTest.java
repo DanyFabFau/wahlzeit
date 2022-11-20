@@ -53,10 +53,6 @@ public class CartesianCoordinateTest {
         CartesianCoordinate c1 = new CartesianCoordinate(1, 2, 3);
         assertTrue(coordinateWithValues.isEqual(c1));
         assertFalse(coordinate.isEqual(c1));
-
-        CartesianCoordinate c2 = new CartesianCoordinate(-1, 0, 0);
-        SphericCoordinate sc = new SphericCoordinate(Math.PI / 2, Math.PI, 1);
-        assertTrue(c2.isEqual(sc));
     }
 
     @Test
