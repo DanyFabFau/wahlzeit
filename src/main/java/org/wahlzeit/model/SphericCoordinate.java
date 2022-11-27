@@ -22,7 +22,7 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     @Override
-    public void assertClassInvariants() {
+    public void assertClassInvariants() throws IllegalStateException {
         try {
             assertIsValidPhi(this.phi);
             assertIsValidTheta(this.theta);
@@ -116,14 +116,14 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     //#endregion SETTER
 
-    private void assertIsValidPhi(double phi) {
+    private void assertIsValidPhi(double phi) throws IllegalArgumentException {
         if (Double.compare(phi, 0.0d) < 0 ||
             Double.compare(phi, Math.PI) > 0) {
                 throw new IllegalArgumentException("Phi is not valid");
             }
     }
 
-    private void assertIsValidTheta(double theta) {
+    private void assertIsValidTheta(double theta) throws IllegalArgumentException {
         if (Double.compare(theta, 0.0d) < 0 ||
             Double.compare(theta, 2 * Math.PI) > 0 ||
             Double.compare(theta, 2 * Math.PI) == 0) {
@@ -131,7 +131,7 @@ public class SphericCoordinate extends AbstractCoordinate {
             }
     }
 
-    private void assertIsValidRadius(double radius) {
+    private void assertIsValidRadius(double radius) throws IllegalArgumentException {
         if (Double.compare(radius, 0.0d) < 0) {
             throw new IllegalArgumentException("Radius is not valid");
         }

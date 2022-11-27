@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class AbstractCoordinate implements Coordinate {
     
-    protected abstract void assertClassInvariants();
+    protected abstract void assertClassInvariants() throws IllegalStateException;
 
     @Override
     public double getCartesianDistance(Coordinate coordinate) {
@@ -95,7 +95,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 
         assertIsGreaterOrEqualZero(res);
         assertClassInvariants();
-        
+
         return res;
     }
 
@@ -122,13 +122,13 @@ public abstract class AbstractCoordinate implements Coordinate {
                Double.compare(thisCartesianCoordinate.getZ(), cartesianCoordinate.getZ()) == 0;
     }
 
-    private void assertIsNonNullCoordinate(Coordinate coordinate) {
+    private void assertIsNonNullCoordinate(Coordinate coordinate) throws IllegalStateException {
         if (coordinate == null) {
             throw new IllegalArgumentException("Coordinate cannot be null");
         }
     }
 
-    private void assertIsGreaterOrEqualZero(double d) {
+    private void assertIsGreaterOrEqualZero(double d) throws ArithmeticException {
         if (d < 0) {
             throw new ArithmeticException("Result cannot be smaller than zero");
         }
