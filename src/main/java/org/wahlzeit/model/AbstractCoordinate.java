@@ -4,13 +4,26 @@ import java.util.Objects;
 
 public abstract class AbstractCoordinate implements Coordinate {
     
+    protected abstract void assertClassInvariants();
+
     @Override
     public double getCartesianDistance(Coordinate coordinate) {
-        return calculateEuclidianDistance(coordinate.asCartesianCoordinate());
+        assertClassInvariants();
+        assertIsNonNullCoordinate(coordinate);
+
+        double distance = calculateEuclidianDistance(coordinate.asCartesianCoordinate());
+
+        assertIsGreaterOrEqualZero(distance);
+        assertClassInvariants();
+
+        return distance;
     }
 
     @Override
     public double getCentralAngle(Coordinate coordinate) {
+        assertClassInvariants();
+        assertIsNonNullCoordinate(coordinate);
+
         SphericCoordinate sc_1 = this.asSphericCoordinate();
         SphericCoordinate sc_2 = coordinate.asSphericCoordinate();
 
@@ -23,23 +36,67 @@ public abstract class AbstractCoordinate implements Coordinate {
 
         double result = Math.acos(sum_1 + sum_2);
 
+        assertIsGreaterOrEqualZero(result);
+        assertClassInvariants();
+
         return asDegree(result);
     }
 
     @Override
     public boolean isEqual(Coordinate coordinate) {
-        return isEqualCartesian(coordinate.asCartesianCoordinate());
+        assertClassInvariants();
+        assertIsNonNullCoordinate(coordinate);
+
+        boolean res = isEqualCartesian(coordinate.asCartesianCoordinate());
+
+        assertClassInvariants();
+
+        return res;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Coordinate && isEqual((Coordinate) obj);
+        assertClassInvariants();
+
+        boolean res = obj instanceof Coordinate && isEqual((Coordinate) obj);
+
+        assertClassInvariants();
+
+        return res;
     }
 
     @Override
     public int hashCode() {
+        assertClassInvariants();
+
         CartesianCoordinate cartesianCoordinate = asCartesianCoordinate();
-        return Objects.hash(cartesianCoordinate.getX(), cartesianCoordinate.getY(), cartesianCoordinate.getZ());
+        int hashCode =  Objects.hash(cartesianCoordinate.getX(), cartesianCoordinate.getY(), cartesianCoordinate.getZ());
+        
+        assertClassInvariants();
+
+        return hashCode;
+    }
+
+    protected double asDegree(double rad) {
+        assertClassInvariants();
+
+        double deg = Math.toDegrees(rad);
+
+        assertClassInvariants();
+
+        return deg;
+    }
+
+    protected double absDiffDeg(double angle_1, double angle_2) {
+        assertClassInvariants();
+
+        double normDeg = Math.abs(angle_1 - angle_2) % 360;
+        double res = Math.min(360 - normDeg, normDeg);
+
+        assertIsGreaterOrEqualZero(res);
+        assertClassInvariants();
+        
+        return res;
     }
 
     /**
@@ -65,12 +122,15 @@ public abstract class AbstractCoordinate implements Coordinate {
                Double.compare(thisCartesianCoordinate.getZ(), cartesianCoordinate.getZ()) == 0;
     }
 
-    protected double asDegree(double rad) {
-        return Math.toDegrees(rad);
+    private void assertIsNonNullCoordinate(Coordinate coordinate) {
+        if (coordinate == null) {
+            throw new IllegalArgumentException("Coordinate cannot be null");
+        }
     }
 
-    protected double absDiffDeg(double angle_1, double angle_2) {
-        double normDeg = Math.abs(angle_1 - angle_2) % 360;
-        return Math.min(360 - normDeg, normDeg);
+    private void assertIsGreaterOrEqualZero(double d) {
+        if (d < 0) {
+            throw new ArithmeticException("Result cannot be smaller than zero");
+        }
     }
 }
