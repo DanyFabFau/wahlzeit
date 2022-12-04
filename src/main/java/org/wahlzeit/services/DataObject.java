@@ -49,4 +49,22 @@ public abstract class DataObject implements Persistent {
 		incWriteCount();
 	}
 
+	protected void assertIsNotNull(Object o, String label) throws IllegalArgumentException {
+        if (o == null) {
+            throw new IllegalArgumentException(label + " cannot be null");
+        }
+    }
+
+    protected void assertIsValidDouble(Double d) throws IllegalArgumentException {
+        if (Double.isNaN(d)) {
+            throw new IllegalArgumentException("Value is not a number");
+        }
+    }
+
+    protected void assertIsGreaterOrEqualZero(Integer id) throws IllegalArgumentException {
+        if (id < 0) {
+            throw new IllegalArgumentException("Value cannot be negative");
+        }
+    }
+
 }

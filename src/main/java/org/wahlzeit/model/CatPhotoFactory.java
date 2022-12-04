@@ -24,7 +24,7 @@ public class CatPhotoFactory extends PhotoFactory {
 	 */
 	public static synchronized PhotoFactory getInstance() {
 		if (instance == null) {
-			SysLog.logSysInfo("setting generic CatPhotoFactory");
+			SysLog.logSysInfo("Setting generic CatPhotoFactory");
 			setInstance(new CatPhotoFactory());
 		}
 		
@@ -34,9 +34,9 @@ public class CatPhotoFactory extends PhotoFactory {
 	/**
 	 * Method to set the singleton instance of PhotoFactory.
 	 */
-	protected static synchronized void setInstance(CatPhotoFactory catPhotoFactory) {
+	protected static synchronized void setInstance(CatPhotoFactory catPhotoFactory) throws IllegalArgumentException {
 		if (instance != null) {
-			throw new IllegalStateException("attempt to initialize CatPhotoFactory twice");
+			throw new IllegalStateException("Attempt to initialize CatPhotoFactory twice");
 		}
 		
 		instance = catPhotoFactory;

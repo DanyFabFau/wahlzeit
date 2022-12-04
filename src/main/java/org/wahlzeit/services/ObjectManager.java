@@ -177,4 +177,17 @@ public abstract class ObjectManager {
 		}
 	}
 
+	protected void assertIsValidDouble(Double d) throws IllegalArgumentException {
+        if (Double.isNaN(d)) {
+            throw new IllegalArgumentException("Value is not a number");
+        }
+    }
+
+    protected void assertIsGreaterOrEqualZero(Integer id) throws IllegalArgumentException {
+        if (id == null ||
+            id < 0) {
+            throw new IllegalArgumentException("Value cannot be negative or null");
+        }
+    }
+
 }

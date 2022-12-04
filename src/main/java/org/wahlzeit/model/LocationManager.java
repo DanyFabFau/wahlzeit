@@ -33,11 +33,15 @@ public class LocationManager extends ObjectManager {
     }
 
     @Override
-    protected Persistent createObject(ResultSet rset) throws SQLException {
+    protected Persistent createObject(ResultSet rset) throws SQLException, IllegalArgumentException {
+        assertIsNonNullArgument(rset, "ResultSet");
+
         return new Location(rset);
     }
 
-    public Location getLocation(Integer id) {
+    public Location getLocation(Integer id) throws IllegalArgumentException {
+        assertIsGreaterOrEqualZero(id);
+
         Location location = locationCache.get(id);
         if (location == null) {
             try {
@@ -51,7 +55,9 @@ public class LocationManager extends ObjectManager {
         return location;
     }
 
-    public void addLocation(Location location) {
+    public void addLocation(Location location) throws IllegalArgumentException {
+        assertIsNonNullArgument(location, "Location");
+
         locationCache.put(location.getId(), location);
         try {
             PreparedStatement stmt = getReadingStatement("INSERT INTO locations(id) VALUES(?)");
@@ -72,7 +78,11 @@ public class LocationManager extends ObjectManager {
         SysLog.logSysInfo("loaded all locations");
     }
 
-    public Location createLocation(double x, double y, double z) throws Exception {
+    public Location createLocation(double x, double y, double z) throws IllegalArgumentException {
+        assertIsValidDouble(x);
+        assertIsValidDouble(y);
+        assertIsValidDouble(z);
+
 		int maxId = START_ID;
         for (Map.Entry<Integer, Location> entry : locationCache.entrySet()) {
             if (entry.getKey() > maxId) {

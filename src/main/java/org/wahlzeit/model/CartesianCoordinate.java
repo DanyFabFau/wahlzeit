@@ -30,8 +30,13 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     @Override
     protected void assertClassInvariants() {
-        // do nothing
-        // always in a legal state
+        try {
+            assertIsValidDouble(x);
+            assertIsValidDouble(y);
+            assertIsValidDouble(z);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStateException("The object is in an illegal state. Double value is not a number");
+        }
     }
 
     @Override
@@ -81,4 +86,11 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	}
 
     //#endregion GETTER
+
+
+    private void assertIsValidDouble(double d) throws IllegalArgumentException {
+        if (Double.isNaN(d)) {
+                throw new IllegalArgumentException("Value is not a number");
+            }
+    }
 }

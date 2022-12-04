@@ -18,7 +18,11 @@ public class Location extends DataObject {
     /**
      * @methodtype constructor
      */
-    public Location(double x, double y, double z) {
+    public Location(double x, double y, double z) throws IllegalArgumentException {
+        assertIsValidDouble(x);
+        assertIsValidDouble(y);
+        assertIsValidDouble(z);
+        
         coordinate = new CartesianCoordinate(x, y, z);
         incWriteCount();
     }
@@ -26,7 +30,12 @@ public class Location extends DataObject {
     /**
      * @methodtype constructor
      */
-    public Location(Integer id, double x, double y, double z) {
+    public Location(Integer id, double x, double y, double z) throws IllegalArgumentException {
+        assertIsGreaterOrEqualZero(id);
+        assertIsValidDouble(x);
+        assertIsValidDouble(y);
+        assertIsValidDouble(z);
+
         this.id = id;
         coordinate = new CartesianCoordinate(x, y, z);
         incWriteCount();
@@ -35,7 +44,9 @@ public class Location extends DataObject {
     /**
      * @methodtype constructor
      */
-    public Location(ResultSet rset) throws SQLException {
+    public Location(ResultSet rset) throws SQLException, IllegalArgumentException {
+        assertIsNotNull(rset, "ResultSet");
+
         readFrom(rset);
         incWriteCount();
     }
@@ -50,10 +61,8 @@ public class Location extends DataObject {
     /**
      * @methodtype set
      */
-    public void setCoordinate(Coordinate newCoordinate) {
-        if (coordinate == null) {
-            throw new IllegalStateException("coordinate cannot be null");
-        }
+    public void setCoordinate(Coordinate newCoordinate) throws IllegalArgumentException {
+        assertIsNotNull(newCoordinate, "Coordinate");
 
         coordinate = newCoordinate;
         incWriteCount();
@@ -72,7 +81,9 @@ public class Location extends DataObject {
     }
 
     @Override
-    public void readFrom(ResultSet rset) throws SQLException {
+    public void readFrom(ResultSet rset) throws SQLException, IllegalArgumentException {
+        assertIsNotNull(rset, "ResultSet");
+
         id = rset.getInt("id");
         coordinate = new CartesianCoordinate(
             rset.getDouble("coordinate_x"),
@@ -82,7 +93,9 @@ public class Location extends DataObject {
     }
 
     @Override
-    public void writeOn(ResultSet rset) throws SQLException {
+    public void writeOn(ResultSet rset) throws SQLException, IllegalArgumentException {
+        assertIsNotNull(rset, "ResultSet");
+
         rset.updateInt("id", id);
         rset.updateDouble("coordinate_x", coordinate.asCartesianCoordinate().getX());
         rset.updateDouble("coordinate_y", coordinate.asCartesianCoordinate().getY());
@@ -90,7 +103,9 @@ public class Location extends DataObject {
     }
 
     @Override
-    public void writeId(PreparedStatement stmt, int pos) throws SQLException {
+    public void writeId(PreparedStatement stmt, int pos) throws SQLException, IllegalArgumentException {
+        assertIsNotNull(stmt, "PreparedStatement");
+
         stmt.setInt(pos, id);
     }
 }

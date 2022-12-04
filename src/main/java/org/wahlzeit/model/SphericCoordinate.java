@@ -117,14 +117,16 @@ public class SphericCoordinate extends AbstractCoordinate {
     //#endregion SETTER
 
     private void assertIsValidPhi(double phi) throws IllegalArgumentException {
-        if (Double.compare(phi, 0.0d) < 0 ||
+        if (Double.isNaN(phi) ||
+            Double.compare(phi, 0.0d) < 0 ||
             Double.compare(phi, Math.PI) > 0) {
                 throw new IllegalArgumentException("Phi is not valid");
             }
     }
 
     private void assertIsValidTheta(double theta) throws IllegalArgumentException {
-        if (Double.compare(theta, 0.0d) < 0 ||
+        if (Double.isNaN(theta) ||
+            Double.compare(theta, 0.0d) < 0 ||
             Double.compare(theta, 2 * Math.PI) > 0 ||
             Double.compare(theta, 2 * Math.PI) == 0) {
                 throw new IllegalArgumentException("Theta is not valid");
@@ -132,7 +134,8 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     private void assertIsValidRadius(double radius) throws IllegalArgumentException {
-        if (Double.compare(radius, 0.0d) < 0) {
+        if (Double.isNaN(radius) ||
+            Double.compare(radius, 0.0d) < 0) {
             throw new IllegalArgumentException("Radius is not valid");
         }
     }

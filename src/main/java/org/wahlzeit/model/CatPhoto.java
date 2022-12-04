@@ -26,7 +26,9 @@ public class CatPhoto extends Photo {
         super(rset);
     }
 
-	public void readFrom(ResultSet rset) throws SQLException {
+	public void readFrom(ResultSet rset) throws SQLException, IllegalArgumentException {
+        assertIsNotNull(rset, "ResultSet");
+
 		id = PhotoId.getIdFromInt(rset.getInt("id"));
 
 		ownerId = rset.getInt("owner_id");
