@@ -13,11 +13,13 @@ public class CartesianCoordinateTest {
     
     private CartesianCoordinate coordinate;
     private CartesianCoordinate coordinateWithValues;
+    private SharedCoordinate sharedCoordinate;
 
     @Before
 	public void initCoordinate() {
-		coordinate = new CartesianCoordinate();
-        coordinateWithValues = new CartesianCoordinate(1.0, 2.0, 3.0);
+		coordinate = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.CARTESIAN).asCartesianCoordinate();
+        coordinateWithValues = sharedCoordinate.getCoordinate(1, 2, 3, CoordinateType.CARTESIAN).asCartesianCoordinate();
+        sharedCoordinate = SharedCoordinate.getInstance();
 	}
 
 	@Test
@@ -37,10 +39,10 @@ public class CartesianCoordinateTest {
 
     @Test
     public void testGetCartesianDistance() {
-        CartesianCoordinate c1 = new CartesianCoordinate(5, 5, 5);
-        CartesianCoordinate c2 = new CartesianCoordinate(-5, -5, -5);
-        CartesianCoordinate c3 = new CartesianCoordinate(1, 2, 3);
-        CartesianCoordinate c4 = new CartesianCoordinate(-10, 0, 10);
+        CartesianCoordinate c1 = sharedCoordinate.getCoordinate(5, 5, 5, CoordinateType.CARTESIAN).asCartesianCoordinate();
+        CartesianCoordinate c2 = sharedCoordinate.getCoordinate(-5, -5, -5, CoordinateType.CARTESIAN).asCartesianCoordinate();
+        CartesianCoordinate c3 = sharedCoordinate.getCoordinate(1, 2, 3, CoordinateType.CARTESIAN).asCartesianCoordinate();
+        CartesianCoordinate c4 = sharedCoordinate.getCoordinate(-10, 0, 10, CoordinateType.CARTESIAN).asCartesianCoordinate();
 
         assertEquals(Math.sqrt(75), coordinate.getCartesianDistance(c1), 0.001);
         assertEquals(Math.sqrt(75), coordinate.getCartesianDistance(c2), 0.001);
@@ -50,14 +52,14 @@ public class CartesianCoordinateTest {
 
     @Test
     public void testIsEqual() {
-        CartesianCoordinate c1 = new CartesianCoordinate(1, 2, 3);
+        CartesianCoordinate c1 = sharedCoordinate.getCoordinate(1, 2, 3, CoordinateType.CARTESIAN).asCartesianCoordinate();
         assertTrue(coordinateWithValues.isEqual(c1));
         assertFalse(coordinate.isEqual(c1));
     }
 
     @Test
     public void testEquals() {
-        CartesianCoordinate c1 = new CartesianCoordinate(1, 2, 3);
+        CartesianCoordinate c1 = sharedCoordinate.getCoordinate(1, 2, 3, CoordinateType.CARTESIAN).asCartesianCoordinate();
 
         assertEquals(coordinateWithValues, c1);
         assertNotEquals(coordinate, c1);
@@ -65,7 +67,7 @@ public class CartesianCoordinateTest {
 
     @Test
     public void testHashCode() {
-        CartesianCoordinate c1 = new CartesianCoordinate(1, 2, 3);
+        CartesianCoordinate c1 = sharedCoordinate.getCoordinate(1, 2, 3, CoordinateType.CARTESIAN).asCartesianCoordinate();
 
         assertEquals(coordinateWithValues.hashCode(), c1.hashCode());
         assertNotEquals(coordinate.hashCode(), c1.hashCode());
@@ -73,7 +75,7 @@ public class CartesianCoordinateTest {
 
     @Test
     public void testAsSphericCoordinate() {
-        CartesianCoordinate c1 = new CartesianCoordinate(1, 2,3);
+        CartesianCoordinate c1 = sharedCoordinate.getCoordinate(1, 2, 3, CoordinateType.CARTESIAN).asCartesianCoordinate();
         SphericCoordinate s1 = c1.asSphericCoordinate();
 
         // expected values from an online calculator:

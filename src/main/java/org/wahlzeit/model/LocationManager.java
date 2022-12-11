@@ -14,15 +14,15 @@ import java.util.Map;
 
 public class LocationManager extends ObjectManager {
 
-    protected static final LocationManager instance = new LocationManager();
+    protected static final LocationManager INSTANCE = new LocationManager();
 
     private static final int START_ID = 1;
 
     public static LocationManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
-    protected Map<Integer, Location> locationCache = new HashMap<>();
+    protected final Map<Integer, Location> locationCache = new HashMap<>();
 
     protected LocationManager() {
         Collection<Location> loadedLocations = new ArrayList<>();

@@ -2,9 +2,9 @@ package org.wahlzeit.model;
 
 public class CartesianCoordinate extends AbstractCoordinate {
     
-    private double x;
-    private double y;
-    private double z;
+    private final double x;
+    private final double y;
+    private final double z;
 
     /**
      * @methodtype constructor
@@ -35,7 +35,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
             assertIsValidDouble(y);
             assertIsValidDouble(z);
         } catch (IllegalArgumentException e) {
-            throw new IllegalStateException("The object is in an illegal state. Double value is not a number");
+            throw new IllegalStateException("The object is in an illegal state");
         }
     }
 
@@ -49,14 +49,18 @@ public class CartesianCoordinate extends AbstractCoordinate {
     public SphericCoordinate asSphericCoordinate() {
         assertClassInvariants();
 
-        double phi = Math.atan2(Math.sqrt(x * x + y * y), z);
-        double theta = Math.atan2(y, x);
-        double radius = Math.sqrt(x * x + y * y + z * z);
-        SphericCoordinate sphericCoordinate = new SphericCoordinate(phi, theta, radius);
-
+        SphericCoordinate sphericCoordinate = 
+            (SphericCoordinate) SharedCoordinate.getInstance()
+            .getCoordinate(getX(), getY(), getZ(), CoordinateType.SPHERICAL);
+        
         assertClassInvariants();
 
         return sphericCoordinate;
+    }
+
+    @Override
+    public CoordinateType getCoordinateType() {
+        return CoordinateType.CARTESIAN;
     }
 
     //#region GETTER
@@ -86,6 +90,41 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	}
 
     //#endregion GETTER
+
+
+    //#region SETTER
+
+    /**
+	 * @methodtype set
+	 */
+	public CartesianCoordinate setX(double x) {
+        assertClassInvariants();
+        assertIsValidDouble(x);
+
+		return SharedCoordinate.getInstance().getCoordinate(x, getY(), getZ(), getCoordinateType()).asCartesianCoordinate();
+	}
+
+    /**
+	 * @methodtype set
+	 */
+	public CartesianCoordinate setY(double y) {
+        assertClassInvariants();
+        assertIsValidDouble(y);
+
+		return SharedCoordinate.getInstance().getCoordinate(getX(), y, getZ(), getCoordinateType()).asCartesianCoordinate();
+	}
+
+    /**
+	 * @methodtype set
+	 */
+	public CartesianCoordinate setZ(double z) {
+        assertClassInvariants();
+        assertIsValidDouble(z);
+
+		return SharedCoordinate.getInstance().getCoordinate(getX(), getY(), z, getCoordinateType()).asCartesianCoordinate();
+	}
+
+    //#endregion SETTER
 
 
     private void assertIsValidDouble(double d) throws IllegalArgumentException {

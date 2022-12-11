@@ -13,11 +13,13 @@ public class SphericCoordinateTest {
     
     private SphericCoordinate coordinate;
     private SphericCoordinate coordinateWithValues;
+    private SharedCoordinate sharedCoordinate;
 
     @Before
 	public void initCoordinate() {
-		coordinate = new SphericCoordinate();
-        coordinateWithValues = new SphericCoordinate(Math.PI / 2, Math.PI, 5);
+        coordinate = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL).asSphericCoordinate();
+        coordinateWithValues = sharedCoordinate.getCoordinate(Math.PI / 2, Math.PI, 5, CoordinateType.SPHERICAL).asSphericCoordinate();
+        sharedCoordinate = SharedCoordinate.getInstance();
 	}
 
 	@Test
@@ -36,36 +38,36 @@ public class SphericCoordinateTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetPhi() {
-        SphericCoordinate sc = new SphericCoordinate(2 * Math.PI, Math.PI, 5);
+        sharedCoordinate.getCoordinate(2 * Math.PI, Math.PI, 5, CoordinateType.SPHERICAL).asSphericCoordinate();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetTheta() {
-        SphericCoordinate sc = new SphericCoordinate(Math.PI, 2 * Math.PI, 5);
+        sharedCoordinate.getCoordinate(Math.PI, 2 * Math.PI, 5, CoordinateType.SPHERICAL).asSphericCoordinate();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetRadius() {
-        SphericCoordinate sc = new SphericCoordinate(Math.PI, Math.PI, -1);
+        sharedCoordinate.getCoordinate(Math.PI, Math.PI, -1, CoordinateType.SPHERICAL).asSphericCoordinate();
     }
 
     @Test
     public void testGetCartesianDistance() {
-        Coordinate c = new CartesianCoordinate(1, 0, 0);
+        Coordinate c = sharedCoordinate.getCoordinate(1, 0, 0, CoordinateType.CARTESIAN).asCartesianCoordinate();
 
         assertEquals(6.0, coordinateWithValues.getCartesianDistance(c), 0.001);
     }
 
     @Test
     public void testIsEqual() {
-        SphericCoordinate s = new SphericCoordinate();
+        SphericCoordinate s = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL).asSphericCoordinate();
         assertTrue(coordinate.isEqual(s));
         assertFalse(coordinateWithValues.isEqual(s));
     }
 
     @Test
     public void testEquals() {
-        SphericCoordinate s = new SphericCoordinate();
+        SphericCoordinate s = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL).asSphericCoordinate();
 
         assertEquals(coordinate, s);
         assertNotEquals(coordinateWithValues, s);
@@ -73,7 +75,7 @@ public class SphericCoordinateTest {
 
     @Test
     public void testHashCode() {
-        SphericCoordinate s = new SphericCoordinate();
+        SphericCoordinate s = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL).asSphericCoordinate();
 
         assertEquals(coordinate.hashCode(), s.hashCode());
         assertNotEquals(coordinateWithValues.hashCode(), s.hashCode());
@@ -101,8 +103,8 @@ public class SphericCoordinateTest {
 
     @Test
     public void testGetCentralAngle() {
-        SphericCoordinate sc_1 = new SphericCoordinate(Math.PI / 2, Math.PI, 1);
-        SphericCoordinate sc_2 = new SphericCoordinate(Math.PI / 4, Math.PI / 2, 1);
+        SphericCoordinate sc_1 = sharedCoordinate.getCoordinate(Math.PI / 2, Math.PI, 1, CoordinateType.SPHERICAL).asSphericCoordinate();
+        SphericCoordinate sc_2 = sharedCoordinate.getCoordinate(Math.PI / 4, Math.PI / 2, 1, CoordinateType.SPHERICAL).asSphericCoordinate();
         
         //TODO
         // expected value approved with an online calculator:

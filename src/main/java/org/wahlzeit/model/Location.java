@@ -18,26 +18,26 @@ public class Location extends DataObject {
     /**
      * @methodtype constructor
      */
-    public Location(double x, double y, double z) throws IllegalArgumentException {
-        assertIsValidDouble(x);
-        assertIsValidDouble(y);
-        assertIsValidDouble(z);
+    public Location(double d_1, double d_2, double d_3, CoordinateType coordinateType) throws IllegalArgumentException {
+        assertIsValidDouble(d_1);
+        assertIsValidDouble(d_2);
+        assertIsValidDouble(d_3);
         
-        coordinate = new CartesianCoordinate(x, y, z);
+        coordinate = SharedCoordinate.getInstance().getCoordinate(d_1, d_2, d_3, coordinateType);
         incWriteCount();
     }
 
     /**
      * @methodtype constructor
      */
-    public Location(Integer id, double x, double y, double z) throws IllegalArgumentException {
+    public Location(Integer id, double d_1, double d_2, double d_3, CoordinateType coordinateType) throws IllegalArgumentException {
         assertIsGreaterOrEqualZero(id);
-        assertIsValidDouble(x);
-        assertIsValidDouble(y);
-        assertIsValidDouble(z);
+        assertIsValidDouble(d_1);
+        assertIsValidDouble(d_2);
+        assertIsValidDouble(d_3);
 
         this.id = id;
-        coordinate = new CartesianCoordinate(x, y, z);
+        coordinate = SharedCoordinate.getInstance().getCoordinate(d_1, d_2, d_3, coordinateType);
         incWriteCount();
     }
 
@@ -85,10 +85,11 @@ public class Location extends DataObject {
         assertIsNotNull(rset, "ResultSet");
 
         id = rset.getInt("id");
-        coordinate = new CartesianCoordinate(
+        coordinate = SharedCoordinate.getInstance().getCoordinate(
             rset.getDouble("coordinate_x"),
             rset.getDouble("coordinate_y"),
-            rset.getDouble("coordinate_z")
+            rset.getDouble("coordinate_z"),
+            CoordinateType.CARTESIAN
         );
     }
 

@@ -47,7 +47,8 @@ public abstract class AbstractCoordinate implements Coordinate {
         assertClassInvariants();
         assertIsNonNullCoordinate(coordinate);
 
-        boolean res = isEqualCartesian(coordinate.asCartesianCoordinate());
+        // benefit of using sharing value objects
+        boolean res = this == coordinate;
 
         assertClassInvariants();
 
@@ -112,14 +113,6 @@ public abstract class AbstractCoordinate implements Coordinate {
         double distZ = cartesianCoordinate.getZ() - thisCartesianCoordinate.getZ();
 
         return Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2) + Math.pow(distZ, 2));
-    }
-
-    private boolean isEqualCartesian(CartesianCoordinate cartesianCoordinate) {
-        CartesianCoordinate thisCartesianCoordinate = this.asCartesianCoordinate();
-
-        return Double.compare(thisCartesianCoordinate.getX(), cartesianCoordinate.getX()) == 0 &&
-               Double.compare(thisCartesianCoordinate.getY(), cartesianCoordinate.getY()) == 0 &&
-               Double.compare(thisCartesianCoordinate.getZ(), cartesianCoordinate.getZ()) == 0;
     }
 
     private void assertIsNonNullCoordinate(Coordinate coordinate) throws IllegalStateException {
