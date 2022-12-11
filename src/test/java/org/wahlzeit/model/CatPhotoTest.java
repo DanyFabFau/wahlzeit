@@ -33,7 +33,7 @@ public class CatPhotoTest {
         assertNotNull(photo);
         assertNull(photo.location);
         
-        photo.location = new Location(0, 0, 0);
+        photo.location = new Location(0, 0, 0, CoordinateType.CARTESIAN);
         assertNotNull(photo.location);
     }
 

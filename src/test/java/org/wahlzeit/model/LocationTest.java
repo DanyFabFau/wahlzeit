@@ -12,7 +12,7 @@ public class LocationTest {
 
     @Before
     public void initLocation() {
-        location = new Location(0, 0, 0);
+        location = new Location(0, 0, 0, CoordinateType.CARTESIAN);
     }
 
     @Test
