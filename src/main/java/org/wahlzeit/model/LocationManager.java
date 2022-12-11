@@ -89,7 +89,7 @@ public class LocationManager extends ObjectManager {
                 maxId = entry.getKey();
             }
         }
-		Location location = new Location(maxId + 1, x, y, z);
+		Location location = new Location(maxId + 1, x, y, z, CoordinateType.CARTESIAN);
 		addLocation(location);
 		return location;
 	}
