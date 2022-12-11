@@ -47,7 +47,6 @@ public abstract class AbstractCoordinate implements Coordinate {
         assertClassInvariants();
         assertIsNonNullCoordinate(coordinate);
 
-        // benefit of using sharing value objects
         boolean res = this == coordinate;
 
         assertClassInvariants();
