@@ -10,6 +10,14 @@ import java.io.FileFilter;
 import java.sql.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.photos.CatPhotoFactory;
+import org.wahlzeit.model.photos.CatPhotoManager;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.photos.PhotoCaseManager;
+import org.wahlzeit.model.photos.PhotoId;
+import org.wahlzeit.model.photos.PhotoManager;
+import org.wahlzeit.model.user.User;
+import org.wahlzeit.model.user.UserManager;
 import org.wahlzeit.services.*;
 import org.wahlzeit.servlets.AbstractServlet;
 

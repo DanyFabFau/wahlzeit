@@ -14,6 +14,7 @@ import javax.servlet.http.*;
 
 import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;

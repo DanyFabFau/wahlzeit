@@ -9,6 +9,11 @@ import java.io.File;
 import java.util.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.photos.CatPhotoManager;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.photos.PhotoSize;
+import org.wahlzeit.model.user.User;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;

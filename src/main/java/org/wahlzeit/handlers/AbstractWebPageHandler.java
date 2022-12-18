@@ -6,6 +6,7 @@
 package org.wahlzeit.handlers;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.*;

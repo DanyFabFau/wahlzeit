@@ -16,6 +16,8 @@ import javax.servlet.annotation.*;
 
 import org.wahlzeit.handlers.*;
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.user.UserLog;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.services.*;
 import org.wahlzeit.webparts.*;
 

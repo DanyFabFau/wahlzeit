@@ -7,7 +7,7 @@ package org.wahlzeit.handlers;
 
 import java.util.*;
 
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.user.UserSession;
 
 /**
  * The general interface for web forms

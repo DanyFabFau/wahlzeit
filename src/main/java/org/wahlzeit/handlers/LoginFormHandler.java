@@ -9,10 +9,10 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.User;
-import org.wahlzeit.model.UserLog;
-import org.wahlzeit.model.UserManager;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.user.User;
+import org.wahlzeit.model.user.UserLog;
+import org.wahlzeit.model.user.UserManager;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 

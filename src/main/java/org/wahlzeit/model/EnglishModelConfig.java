@@ -8,6 +8,7 @@ package org.wahlzeit.model;
 import java.net.*;
 import java.text.*;
 
+import org.wahlzeit.model.photos.PhotoSize;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 

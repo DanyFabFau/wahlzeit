@@ -8,7 +8,7 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 

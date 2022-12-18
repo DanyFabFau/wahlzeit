@@ -11,11 +11,11 @@ import org.wahlzeit.agents.Agent;
 import org.wahlzeit.agents.AgentManager;
 import org.wahlzeit.agents.NotifyAboutPraiseAgent;
 import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.CatPhotoManager;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.PhotoManager;
-import org.wahlzeit.model.UserLog;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.photos.CatPhotoManager;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.photos.PhotoManager;
+import org.wahlzeit.model.user.UserLog;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 

@@ -9,6 +9,7 @@ import java.io.*;
 import java.text.*;
 
 import org.wahlzeit.main.*;
+import org.wahlzeit.model.photos.PhotoSize;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 

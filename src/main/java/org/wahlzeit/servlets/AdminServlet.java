@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 
 import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.main.ServiceMain;
-import org.wahlzeit.model.UserLog;
+import org.wahlzeit.model.user.UserLog;
 import org.wahlzeit.services.SysLog;
 
 

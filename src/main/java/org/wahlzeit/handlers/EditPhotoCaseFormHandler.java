@@ -8,12 +8,12 @@ package org.wahlzeit.handlers;
 import java.util.Map;
 
 import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.PhotoCase;
-import org.wahlzeit.model.PhotoCaseManager;
-import org.wahlzeit.model.PhotoStatus;
-import org.wahlzeit.model.UserLog;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.photos.PhotoCase;
+import org.wahlzeit.model.photos.PhotoCaseManager;
+import org.wahlzeit.model.photos.PhotoStatus;
+import org.wahlzeit.model.user.UserLog;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;

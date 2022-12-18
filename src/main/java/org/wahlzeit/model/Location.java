@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.wahlzeit.model.coordinates.Coordinate;
+import org.wahlzeit.model.coordinates.CoordinateType;
+import org.wahlzeit.model.coordinates.SharedCoordinate;
 import org.wahlzeit.services.DataObject;
 
 public class Location extends DataObject {

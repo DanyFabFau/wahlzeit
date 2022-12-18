@@ -9,6 +9,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.user.User;
+import org.wahlzeit.model.user.UserLog;
+import org.wahlzeit.model.user.UserManager;
 import org.wahlzeit.services.*;
 import org.wahlzeit.services.mailing.*;
 

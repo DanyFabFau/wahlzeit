@@ -6,6 +6,9 @@
 package org.wahlzeit.model;
 
 import org.junit.Test;
+import org.wahlzeit.model.photos.PhotoId;
+import org.wahlzeit.model.photos.PhotoStatus;
+import org.wahlzeit.model.user.UserStatus;
 
 import static org.junit.Assert.assertTrue;
 

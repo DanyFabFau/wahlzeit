@@ -8,6 +8,12 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.photos.CatPhotoManager;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.photos.PhotoManager;
+import org.wahlzeit.model.photos.PhotoStatus;
+import org.wahlzeit.model.user.UserLog;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
 

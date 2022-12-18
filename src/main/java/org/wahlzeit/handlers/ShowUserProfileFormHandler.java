@@ -8,9 +8,9 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.User;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.photos.Photo;
+import org.wahlzeit.model.user.User;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
 

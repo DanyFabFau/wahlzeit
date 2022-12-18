@@ -9,8 +9,8 @@ import java.util.*;
 
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.ModelConfig;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.model.LanguageConfigs;
-import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;

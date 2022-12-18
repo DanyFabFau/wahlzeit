@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.model.coordinates.CoordinateType;
 import org.wahlzeit.services.ObjectManager;
 import org.wahlzeit.services.Persistent;
 import org.wahlzeit.services.SysLog;

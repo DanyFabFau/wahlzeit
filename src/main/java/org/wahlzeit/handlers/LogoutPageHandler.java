@@ -9,7 +9,7 @@ import java.util.*;
 
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.Guest;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.user.UserSession;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
