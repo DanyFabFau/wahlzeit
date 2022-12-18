@@ -21,15 +21,17 @@ public class SharedCoordinate {
 
     public Coordinate getCoordinate(double d_1, double d_2, double d_3, CoordinateType coordinateType) {
         Coordinate newCoordinate = createNewCoordinate(d_1, d_2, d_3, coordinateType);
+        int hashCode = newCoordinate.hashCode();
 
         if (newCoordinate.getCoordinateType() == CoordinateType.CARTESIAN) {
-            Coordinate cartesianFromCache = cartesianCache.get(newCoordinate.hashCode());
+            Coordinate cartesianFromCache = cartesianCache.get(hashCode);
 
             if (cartesianFromCache == null) {
                 synchronized(this) {
-                    Coordinate spheric = createSphericalCoordinateFromCartesian(d_1, d_2, d_3);
-                    cartesianCache.put(newCoordinate.hashCode(), newCoordinate);
-                    sphericalCache.put(spheric.hashCode(), spheric);
+                    double[] phi_theta_radius = calculateSphericalCoordinateFromCartesian(d_1, d_2, d_3);
+                    Coordinate spheric = new SphericCoordinate(phi_theta_radius[0], phi_theta_radius[1], phi_theta_radius[2]);
+                    cartesianCache.put(hashCode, newCoordinate);
+                    sphericalCache.put(hashCode, spheric);
                     return newCoordinate;
                 }
             }
@@ -37,20 +39,21 @@ public class SharedCoordinate {
         }
 
         // else: coordinateType == CoordinateType.SPHERICAL
-        Coordinate sphericalFromCache = sphericalCache.get(newCoordinate.hashCode());
+        Coordinate sphericalFromCache = sphericalCache.get(hashCode);
 
         if (sphericalFromCache == null) {
             synchronized (this) {
-                Coordinate cartesian = createCartesianCoordinateFromSpherical(d_1, d_2, d_3);
-                sphericalCache.put(newCoordinate.hashCode(), newCoordinate);
-                cartesianCache.put(cartesian.hashCode(), cartesian);
+                double[] x_y_z = calculateCartesianCoordinateFromSpherical(d_1, d_2, d_3);
+                Coordinate cartesian = new CartesianCoordinate(x_y_z[0], x_y_z[1], x_y_z[2]);
+                sphericalCache.put(hashCode, newCoordinate);
+                cartesianCache.put(hashCode, cartesian);
                 return newCoordinate;
             }
         }
         return sphericalFromCache;
     }
 
-    protected Coordinate createCartesianCoordinateFromSpherical(double phi, double theta, double radius) {
+    protected static double[] calculateCartesianCoordinateFromSpherical(double phi, double theta, double radius) {
         SphericCoordinate.assertIsValidPhi(phi);
         SphericCoordinate.assertIsValidTheta(theta);
         SphericCoordinate.assertIsValidRadius(radius);
@@ -59,15 +62,19 @@ public class SharedCoordinate {
         double y = radius * Math.sin(phi) * Math.sin(theta);
         double z = radius * Math.cos(phi);
 
-        return new CartesianCoordinate(x, y, z);
+        return new double[] {x, y, z};
     }
 
-    protected Coordinate createSphericalCoordinateFromCartesian(double x, double y, double z) {
+    protected static double[] calculateSphericalCoordinateFromCartesian(double x, double y, double z) {
         double phi = Math.atan2(Math.sqrt(x * x + y * y), z);
         double theta = Math.atan2(y, x);
         double radius = Math.sqrt(x * x + y * y + z * z);
 
-        return new SphericCoordinate(phi, theta, radius);
+        SphericCoordinate.assertIsValidPhi(phi);
+        SphericCoordinate.assertIsValidTheta(theta);
+        SphericCoordinate.assertIsValidRadius(radius);
+
+        return new double[] {phi, theta, radius};
     }
 
     private Coordinate createNewCoordinate(double d_1, double d_2, double d_3, CoordinateType coordinateType) {

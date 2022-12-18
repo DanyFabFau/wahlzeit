@@ -11,20 +11,28 @@ public class SharedCoordinateTest {
     private SharedCoordinate sharedCoordinate;
 
     @Before
-	public void initCoordinate() {
+    public void initCoordinate() {
         sharedCoordinate = SharedCoordinate.getInstance();
-	}
+    }
 
-	@Test
-	public void testConstructors() {
-        Coordinate cc_1 = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.CARTESIAN);
-        Coordinate cc_2 = sharedCoordinate.getCoordinate(5, 5, 5, CoordinateType.CARTESIAN);
-        Coordinate sc_1 = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL);
-        Coordinate sc_2 = sharedCoordinate.getCoordinate(5, 5, 5, CoordinateType.SPHERICAL);
+    @Test
+    public void testgetCoordinate() {
+        Coordinate c_1 = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.CARTESIAN);
+        Coordinate c_2 = sharedCoordinate.getCoordinate(5, 5, 5, CoordinateType.CARTESIAN);
+        Coordinate s_1 = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL);
+        Coordinate s_2 = sharedCoordinate.getCoordinate(Math.PI / 2, Math.PI, 5, CoordinateType.SPHERICAL);
 
-        assertEquals(cc_1, sc_1);
-        assertNotEquals(cc_2, sc_2);
-        assertNotEquals(cc_1, cc_2);
-        assertNotEquals(sc_1, sc_2);
-	}
+        assertEquals(c_1, s_1);
+        assertNotEquals(c_2, s_2);
+        assertNotEquals(c_1, c_2);
+        assertNotEquals(s_1, s_2);
+    }
+
+    @Test
+    public void testHashCodes() {
+        Coordinate c_1 = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.CARTESIAN);
+        Coordinate s_1 = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL);
+
+        assertEquals(c_1.hashCode(), s_1.hashCode());
+    }
 }

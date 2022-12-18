@@ -49,9 +49,11 @@ public class CartesianCoordinate extends AbstractCoordinate {
     public SphericCoordinate asSphericCoordinate() {
         assertClassInvariants();
 
+        double[] phi_theta_radius = SharedCoordinate.calculateSphericalCoordinateFromCartesian(getX(), getY(), getZ());
+
         SphericCoordinate sphericCoordinate = 
             (SphericCoordinate) SharedCoordinate.getInstance()
-            .getCoordinate(getX(), getY(), getZ(), CoordinateType.SPHERICAL);
+            .getCoordinate(phi_theta_radius[0], phi_theta_radius[1], phi_theta_radius[2], CoordinateType.SPHERICAL);
         
         assertClassInvariants();
 
@@ -61,6 +63,11 @@ public class CartesianCoordinate extends AbstractCoordinate {
     @Override
     public CoordinateType getCoordinateType() {
         return CoordinateType.CARTESIAN;
+    }
+
+    @Override
+    public Object clone() {
+        return new CartesianCoordinate(getX(), getY(), getZ());
     }
 
     //#region GETTER

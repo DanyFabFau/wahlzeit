@@ -47,7 +47,7 @@ public abstract class AbstractCoordinate implements Coordinate {
         assertClassInvariants();
         assertIsNonNullCoordinate(coordinate);
 
-        boolean res = this == coordinate;
+        boolean res = this.hashCode() == coordinate.hashCode();
 
         assertClassInvariants();
 

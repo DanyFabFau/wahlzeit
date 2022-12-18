@@ -17,9 +17,9 @@ public class SphericCoordinateTest {
 
     @Before
 	public void initCoordinate() {
+        sharedCoordinate = SharedCoordinate.getInstance();
         coordinate = sharedCoordinate.getCoordinate(0, 0, 0, CoordinateType.SPHERICAL).asSphericCoordinate();
         coordinateWithValues = sharedCoordinate.getCoordinate(Math.PI / 2, Math.PI, 5, CoordinateType.SPHERICAL).asSphericCoordinate();
-        sharedCoordinate = SharedCoordinate.getInstance();
 	}
 
 	@Test
@@ -79,6 +79,14 @@ public class SphericCoordinateTest {
 
         assertEquals(coordinate.hashCode(), s.hashCode());
         assertNotEquals(coordinateWithValues.hashCode(), s.hashCode());
+    }
+
+    @Test
+    public void testClone() {
+        SphericCoordinate s = (SphericCoordinate) coordinateWithValues.clone();
+
+        assertEquals(coordinateWithValues.hashCode(), s.hashCode());
+        assertNotEquals(coordinate.hashCode(), s.hashCode());
     }
 
     @Test
