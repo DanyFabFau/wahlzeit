@@ -8,6 +8,7 @@ package org.wahlzeit.model.photos;
 import java.sql.*;
 import java.net.*;
 
+import org.wahlzeit.annotations.PatternInstance;
 import org.wahlzeit.model.Location;
 import org.wahlzeit.model.ModelConfig;
 import org.wahlzeit.model.Tags;
@@ -17,6 +18,12 @@ import org.wahlzeit.utils.*;
 /**
  * A photo represents a user-provided (uploaded) photo.
  */
+@PatternInstance(
+    patternName = "Abstract Factory",
+    participants = {
+        "CatPhoto"
+    }
+)
 public abstract class Photo extends DataObject {
 
 	/**

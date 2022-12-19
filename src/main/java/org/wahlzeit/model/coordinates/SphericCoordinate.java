@@ -1,5 +1,13 @@
 package org.wahlzeit.model.coordinates;
 
+import org.wahlzeit.annotations.PatternInstance;
+
+@PatternInstance(
+    patternName = "Shared Value Object",
+    participants = {
+        "SharedCoordinate"
+    }
+)
 public class SphericCoordinate extends AbstractCoordinate {
     
     private final double phi;     // latitude

@@ -3,6 +3,16 @@ package org.wahlzeit.model.coordinates;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.wahlzeit.annotations.PatternInstance;
+
+@PatternInstance(
+    patternName = "Flyweight",
+    participants = {
+        "Coordinate",
+        "CartesianCoordinate",
+        "SphericCoordinate"
+    }
+)
 public class SharedCoordinate {
 
     private static final SharedCoordinate INSTANCE = new SharedCoordinate();

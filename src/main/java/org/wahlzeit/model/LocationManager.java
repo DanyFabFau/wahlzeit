@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.annotations.PatternInstance;
 import org.wahlzeit.model.coordinates.CoordinateType;
 import org.wahlzeit.services.ObjectManager;
 import org.wahlzeit.services.Persistent;
@@ -13,6 +14,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@PatternInstance(
+    patternName = "Singleton",
+    participants = {
+        "Location"
+    }
+)
 public class LocationManager extends ObjectManager {
 
     protected static final LocationManager INSTANCE = new LocationManager();

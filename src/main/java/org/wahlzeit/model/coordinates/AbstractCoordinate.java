@@ -2,11 +2,28 @@ package org.wahlzeit.model.coordinates;
 
 import java.util.Objects;
 
+import org.wahlzeit.annotations.PatternInstance;
+
+@PatternInstance(
+    patternName = "Abstract Factory",
+    participants = {
+        "Coordinate",
+        "CartesianCoordinate",
+        "SphericCoordinate",
+    }
+)
 public abstract class AbstractCoordinate implements Coordinate {
     
     protected abstract void assertClassInvariants() throws IllegalStateException;
 
     @Override
+    @PatternInstance(
+        patternName = "Template method",
+        participants = {
+            "Coordinate",
+            "CartesianCoordinate"
+        }
+    )
     public double getCartesianDistance(Coordinate coordinate) {
         assertClassInvariants();
         assertIsNonNullCoordinate(coordinate);
@@ -20,6 +37,13 @@ public abstract class AbstractCoordinate implements Coordinate {
     }
 
     @Override
+    @PatternInstance(
+        patternName = "Template method",
+        participants = {
+            "Coordinate",
+            "SphericCoordinate"
+        }
+    )
     public double getCentralAngle(Coordinate coordinate) {
         assertClassInvariants();
         assertIsNonNullCoordinate(coordinate);
@@ -43,6 +67,14 @@ public abstract class AbstractCoordinate implements Coordinate {
     }
 
     @Override
+    @PatternInstance(
+        patternName = "Template method",
+        participants = {
+            "Coordinate",
+            "CartesianCoordinate",
+            "SphericCoordinate"
+        }
+    )
     public boolean isEqual(Coordinate coordinate) {
         assertClassInvariants();
         assertIsNonNullCoordinate(coordinate);
@@ -66,6 +98,12 @@ public abstract class AbstractCoordinate implements Coordinate {
     }
 
     @Override
+    @PatternInstance(
+        patternName = "Template method",
+        participants = {
+            "CartesianCoordinate"
+        }
+    )
     public int hashCode() {
         assertClassInvariants();
 
