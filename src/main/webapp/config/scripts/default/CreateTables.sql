@@ -34,7 +34,19 @@ CREATE TABLE photos (
 	cat_name text,
 	cat_breed text,
 	fur_color text,
-	fur_pattern
+	fur_pattern text,
+	cat_id integer REFERENCES cats(id)
+);
+
+CREATE TABLE cats (
+	id integer PRIMARY KEY,
+	cat_type integer REFERENCES cat_types(id)
+);
+
+CREATE TABLE cat_types (
+	id integer PRIMARY KEY,
+	name text,
+	supertype_id integer REFERENCES cat_types(id)
 );
 
 CREATE TABLE tags (

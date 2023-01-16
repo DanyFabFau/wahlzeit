@@ -26,11 +26,11 @@ public class LocationManager extends ObjectManager {
 
     private static final int START_ID = 1;
 
+    protected final Map<Integer, Location> locationCache = new HashMap<>();
+
     public static LocationManager getInstance() {
         return INSTANCE;
     }
-
-    protected final Map<Integer, Location> locationCache = new HashMap<>();
 
     protected LocationManager() {
         Collection<Location> loadedLocations = new ArrayList<>();
@@ -75,17 +75,6 @@ public class LocationManager extends ObjectManager {
         }
     }
 
-    private void loadLocations(Collection<Location> result) {
-        try {
-            PreparedStatement stmt = getReadingStatement("SELECT * FROM locations");
-            readObjects(result, stmt);
-        } catch (SQLException ex) {
-            SysLog.logThrowable(ex);
-        }
-
-        SysLog.logSysInfo("loaded all locations");
-    }
-
     public Location createLocation(double x, double y, double z) throws IllegalArgumentException {
         assertIsValidDouble(x);
         assertIsValidDouble(y);
@@ -101,4 +90,15 @@ public class LocationManager extends ObjectManager {
 		addLocation(location);
 		return location;
 	}
+
+    private void loadLocations(Collection<Location> result) {
+        try {
+            PreparedStatement stmt = getReadingStatement("SELECT * FROM locations");
+            readObjects(result, stmt);
+        } catch (SQLException ex) {
+            SysLog.logThrowable(ex);
+        }
+
+        SysLog.logSysInfo("loaded all locations");
+    }
 }

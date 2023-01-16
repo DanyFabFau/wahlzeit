@@ -15,6 +15,7 @@ public class CatPhoto extends Photo {
     protected String catBreed;
     protected String furColor;
     protected String furPattern;
+    protected Cat cat;
 
     public CatPhoto() {
         super();
@@ -60,6 +61,7 @@ public class CatPhoto extends Photo {
         catBreed = rset.getString("cat_breed");
         furColor = rset.getString("fur_color");
         furPattern = rset.getString("fur_pattern");
+        cat = CatManager.getInstance().getCat(rset.getInt("cat_id"));
 	}
 
 	public void writeOn(ResultSet rset) throws SQLException {
@@ -82,6 +84,7 @@ public class CatPhoto extends Photo {
         rset.updateString("cat_breed", catBreed);
         rset.updateString("fur_color", furColor);
         rset.updateString("fur_pattern", furPattern);
+        rset.updateInt("cat_id", cat.getId());
 	}
 
     /**
@@ -113,6 +116,13 @@ public class CatPhoto extends Photo {
     }
 
     /**
+     * @methodtype get
+     */
+    public Cat getCat() {
+        return cat;
+    }
+
+    /**
      * @methodtyoe set
      */
     public void setCatName(String catName) {
@@ -141,6 +151,14 @@ public class CatPhoto extends Photo {
      */
     public void setFurPattern(String furPattern) {
         this.furPattern = furPattern;
+        incWriteCount();
+    }
+
+    /**
+     * @methodtyoe set
+     */
+    public void setCat(Cat cat) {
+        this.cat = cat;
         incWriteCount();
     }
 }
