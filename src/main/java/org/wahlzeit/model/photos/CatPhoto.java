@@ -17,14 +17,30 @@ public class CatPhoto extends Photo {
     protected String furPattern;
     protected Cat cat;
 
+    /**
+     * Constructor for creating a new default CatPhoto.
+     * Calls the super constructor of its super type Photo.
+     * @throws SQLException
+     */
     public CatPhoto() {
         super();
     }
 
+    /**
+     * Constructor for creating a new CatPhoto with a specific ID.
+     * Calls the super constructor of its super type Photo.
+     * @param id
+     */
     public CatPhoto(PhotoId id) {
         super(id);
     }
 
+    /**
+     * Constructor for creating a new CatPhoto from a database result set.
+     * Calls the super constructor of its super type Photo.
+     * @param rset the result set from a database
+     * @throws SQLException
+     */
     public CatPhoto(ResultSet rset) throws SQLException {
         super(rset);
     }

@@ -26,18 +26,25 @@ public class CatPhotoManager extends PhotoManager {
 		return getPhoto(id) != null;
 	}
 	
-	public static Photo getPhoto(String id) throws IllegalArgumentException {
+	public static CatPhoto getPhoto(String id) throws IllegalArgumentException {
 		assertIsNotNull(id, "ID");
 		return getPhoto(PhotoId.getIdFromString(id));
 	}
 	
-	public static Photo getPhoto(PhotoId id) throws IllegalArgumentException {
+	public static CatPhoto getPhoto(PhotoId id) throws IllegalArgumentException {
 		assertIsNotNull(id, "ID");
-		return instance.getPhotoFromId(id);
+		return (CatPhoto) getInstance().getPhotoFromId(id);
 	}
 
+	/**
+	 * Creates a CatPhoto based on a result set from a database by calling the creation method of the CatPhotoFactory
+	 * @param rset the result set from a database
+	 * @return an instance of CatPhoto with all the attributes from the result set
+	 * @throws SQLException
+	 * @throws IllegalArgumentException
+	 */
     @Override
-    protected Photo createObject(ResultSet rset) throws SQLException, IllegalArgumentException {
+    protected CatPhoto createObject(ResultSet rset) throws SQLException, IllegalArgumentException {
 		assertIsNotNull(rset, "ID");
         return CatPhotoFactory.getInstance().createPhoto(rset);
     }

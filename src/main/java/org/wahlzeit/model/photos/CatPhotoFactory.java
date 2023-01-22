@@ -22,7 +22,7 @@ public class CatPhotoFactory extends PhotoFactory {
 	/**
 	 * Public singleton access method.
 	 */
-	public static synchronized PhotoFactory getInstance() {
+	public static synchronized CatPhotoFactory getInstance() {
 		if (instance == null) {
 			SysLog.logSysInfo("Setting generic CatPhotoFactory");
 			setInstance(new CatPhotoFactory());
@@ -49,18 +49,33 @@ public class CatPhotoFactory extends PhotoFactory {
 		getInstance(); // drops result due to getInstance() side-effects
 	}
 
+	/**
+	 * Creates a new CatPhoto by calling the default constructor
+	 * @return a new CatPhoto
+	 */
     @Override
     public CatPhoto createPhoto() {
         return new CatPhoto();
     }
 
+	/**
+	 * Creates a new CatPhoto with a specific ID by calling the corresponding constructor
+	 * @param id
+	 * @return a new CatPhoto
+	 */
     @Override
     public CatPhoto createPhoto(PhotoId id) {
         return new CatPhoto(id);
     }
 
+	/**
+	 * Creates a new CatPhoto from a database result set by calling the corresponding constructor
+	 * @param rset the result set from a database
+	 * @return a new CatPhoto
+	 * @throws SQLException
+	 */
     @Override
-    public CatPhoto createPhoto(ResultSet rs) throws SQLException {
-        return new CatPhoto(rs);
+    public CatPhoto createPhoto(ResultSet rset) throws SQLException {
+        return new CatPhoto(rset);
     }
 }

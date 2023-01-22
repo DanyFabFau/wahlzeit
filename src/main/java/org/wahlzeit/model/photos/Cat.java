@@ -11,12 +11,22 @@ public class Cat extends DataObject {
     private Integer id = null;
     private CatType catType;
 
+    /**
+     * Constructor for creating a new Cat with a specific ID and CatType.
+     * @param id
+     * @param catType
+     */
     protected Cat(Integer id, CatType catType) {
         this.id = id;
         this.catType = catType;
         incWriteCount();
     }
 
+    /**
+     * Constructor for creating a new Cat from a database result set by using the readFrom method.
+     * @param rset the result set from a database
+     * @throws SQLException
+     */
     protected Cat(ResultSet rset) throws SQLException {
         readFrom(rset);
     }

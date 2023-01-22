@@ -24,6 +24,11 @@ public class CatType extends DataObject {
         incWriteCount();
     }
 
+    /**
+     * Creates a new Cat with a given ID and 'this' CatType by calling corresponding constructor
+     * @param id
+     * @return a new Cat
+     */
     public Cat createInstance(Integer id) {
         return new Cat(id, this);
     }

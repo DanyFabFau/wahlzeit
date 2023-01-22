@@ -38,6 +38,12 @@ public class CatManager extends ObjectManager {
         return INSTANCE;
     }
 
+    /**
+     * Creates a Cat based on a result set from a database by calling the corresponding constructor
+     * @param rset the result set from a database
+     * @return a new Cat from a database result set
+     * @throws SQLException
+     */
     @Override
     protected Persistent createObject(ResultSet rset) throws SQLException {
         assertIsNonNullArgument(rset, "ResultSet");
@@ -100,6 +106,14 @@ public class CatManager extends ObjectManager {
         }
     }
 
+    /**
+     * Creates an instance of a Cat based on the CatTypeName by first searching for it in the database using a private method.
+     * Calls the createInstance method of the corresponding CatType.
+     * Inserts the Cat instance into the database.
+     * @param catTypeName the name of the CatType
+     * @return a new Cat with the given CatType
+     * @throws IllegalArgumentException
+     */
     public Cat createCat(String catTypeName) throws IllegalArgumentException {
         assertIsNonNullArgument(catTypeName, "CatTypeName");
 
@@ -110,7 +124,7 @@ public class CatManager extends ObjectManager {
                 maxId = entry.getKey();
             }
         }
-		Cat cat = catType.createInstance(maxId);
+		Cat cat = catType.createInstance(maxId + 1);
 		addCat(cat);
 		return cat;
 	}
@@ -137,6 +151,13 @@ public class CatManager extends ObjectManager {
         SysLog.logSysInfo("loaded all cats");
     }
 
+    /**
+     * Private helper method which tries to find the given CatTypeName in the cached database.
+     * If the CatType exists in the database, it will be returned.
+     * Otherwise, a new CatType will be created.
+     * @param catTypeName
+     * @return an existing/new CatType
+     */
     private CatType getCatType(String catTypeName) {
         CatType catType = catTypeCache.values().stream().filter(ct -> ct.getName().equals(catTypeName)).findFirst().orElse(null);
 
@@ -147,7 +168,7 @@ public class CatManager extends ObjectManager {
                     maxId = entry.getKey();
                 }
             }
-            catType = new CatType(maxId, catTypeName);
+            catType = new CatType(maxId + 1, catTypeName);
             addCatType(catType);
         }
         return catType;
