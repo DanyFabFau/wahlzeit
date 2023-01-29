@@ -9,6 +9,23 @@ import java.util.Set;
 
 import org.wahlzeit.services.DataObject;
 
+/**
+ *  public collaboration CatCatType {
+ *      public role Cat {
+ *          // Base Object
+ *          // Receives common information from CatType
+ *          CatType getCatType();
+ *      }
+ *      public role CatType {
+ *          // Type Object
+ *          // Provides common information to Cat
+ *          Cat createInstance(Integer id);
+ *          boolean hasInstance(Cat cat);
+ *      }
+ *  }
+ *  // binds CatCatType.CatType
+ */
+
 public class CatType extends DataObject {
 
     private Integer id;

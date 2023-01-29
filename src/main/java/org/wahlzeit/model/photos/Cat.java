@@ -6,6 +6,56 @@ import java.sql.SQLException;
 
 import org.wahlzeit.services.DataObject;
 
+/**
+ *  public collaboration CatPhotoCat {
+ *      public role CatPhoto {
+ *          // Client
+ *          // Owner of Cat
+ *          Cat getCat();
+ *          void setCat(Cat cat);
+ *      }
+ *      public role Cat {
+ *          // Service
+ *          // Provides functionality/information to CatPhoto
+ *      }
+ *  }
+ *  // binds CatPhotoCat.Cat
+ * 
+ * 
+ *  public collaboration CatCatType {
+ *      public role Cat {
+ *          // Base Object
+ *          // Receives information from CatType
+ *          CatType getCatType();
+ *      }
+ *      public role CatType {
+ *          // Type Object
+ *          // Provides functionality/information to Cat
+ *          Cat createInstance(Integer id);
+ *          boolean hasInstance(Cat cat);
+ *      }
+ *  }
+ *  // binds CatCatType.Cat
+ * 
+ * 
+ *  public collaboration CatManagerCat {
+ *      public role CatManager {
+ *          // Manager
+ *          // Centralizes object management in one place
+ *          Cat getCat(Integer id);
+ *          void addCat(Cat cat);
+ *          Cat createCat(String catTypeName);
+ *          void loadCats(Collection<Cat> result);
+ *      }
+ *      public role Cat {
+ *          // Element
+ *          // Gets managed and stored by CatManager
+ *          // No methods, acts like a client
+ *      }
+ *  }
+ *  // binds CatManagerCat.Cat
+ */
+
 public class Cat extends DataObject {
 
     private Integer id = null;

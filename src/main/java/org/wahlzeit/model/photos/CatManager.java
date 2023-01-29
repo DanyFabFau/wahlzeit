@@ -12,6 +12,25 @@ import org.wahlzeit.services.ObjectManager;
 import org.wahlzeit.services.Persistent;
 import org.wahlzeit.services.SysLog;
 
+/**
+ *  public collaboration CatManagerCat {
+ *      public role CatManager {
+ *          // Manager
+ *          // Centralizes object management in one place
+ *          Cat getCat(Integer id);
+ *          void addCat(Cat cat);
+ *          Cat createCat(String catTypeName);
+ *          void loadCats(Collection<Cat> result);
+ *      }
+ *      public role Cat {
+ *          // Element
+ *          // Gets managed and stored by CatManager
+ *          // No methods, acts like a client
+ *      }
+ *  }
+ *  // binds CatManagerCat.CatManager
+ */
+
 public class CatManager extends ObjectManager {
 
     protected static final CatManager INSTANCE = new CatManager();

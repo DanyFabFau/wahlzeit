@@ -9,6 +9,22 @@ import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.utils.StringUtil;
 
+/**
+ *  public collaboration CatPhotoCat {
+ *      public role CatPhoto {
+ *          // Client
+ *          // Owner of Cat
+ *          Cat getCat();
+ *          void setCat(Cat cat);
+ *      }
+ *      public role Cat {
+ *          // Service
+ *          // Provides functionality/information to CatPhoto
+ *      }
+ *  }
+ *  // binds CatPhotoCat.CatPhoto
+ */
+
 public class CatPhoto extends Photo {
     
     protected String catName;
